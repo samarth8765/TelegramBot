@@ -29,4 +29,11 @@ def send_joke(message):
 
     bot.send_message(message.chat.id,msg)
 
+@bot.message_handler(commands=['meme'])
+def send_meme(message):
+    response = requests.get('https://meme-api.herokuapp.com/gimme')
+    res = response.json()
+    bot.send_photo(message.chat.id,res['url'])
+    
+
 bot.infinity_polling()
